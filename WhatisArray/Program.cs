@@ -1,5 +1,9 @@
 ﻿// System 이라는 어셈블리에서 이것 저것 여러 기능을 가져와서 사용하겠다.
 using System;
+using System.Collections;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Xml.Linq;
 
 // 내 프로그램 이름이다. 내가 정했다.
 namespace WhatisArray
@@ -1012,32 +1016,579 @@ namespace WhatisArray
              * 가변(Jagged) 배열 : '배열의 배열'이라고도 하며, 이름 하나로 다양한 차원의 배열을 표현할 때 사용한다.
              */
 
-            // 배열의 선언과 초기화
-            int[] numbers = new int[5] { 1, 2, 3, 4, 5 };
+            //// 배열의 선언과 초기화
+            //int[] numbers = new int[5] { 1, 2, 3, 4, 5 };
 
-            //numbers.Length 배열 길이
+            ////numbers.Length 배열 길이
 
-            // 메모리 여기저기에 저장되서 난잡함
+            //// 메모리 여기저기에 저장되서 난잡함
             //int number1 = 1;
             //int number2 = 2;
             //int number3 = 3;
             //int number4 = 4;
             //int number5 = 5;
 
-            // 배열은 메모리에 낭비를 줄일 수 있다.
-            Console.WriteLine(numbers);
+            //// 배열은 메모리에 낭비를 줄일 수 있다.
+            // Console.WriteLine(numbers);
 
 
-            //for(int index = 0; index < numbers.Length; index++)
+            //for (int index = 0; index < numbers.Length; index++)
             //{
             //    Console.Write("{0} ", numbers[index]);
             //}
 
+            //Console.WriteLine();
+            //Console.WriteLine();
+
             //// numbers에 있는 걸 element에 하나 하나 저장하겠다.
-            //foreach (int element in numbers) 
+            //foreach (int element in numbers)
             //{
             //    Console.Write("{0} ", element);
             //}
+
+
+            //// 모드(Mod) 연산
+            //int number = 1_0822;
+            //Console.WriteLine("64로 Mod 연산 : {0}", number % 64);
+
+            /**
+             * 다차원 배열
+             * 2차원 배열, 3차원 배열처럼 차원이 2개 이상인 배열을 다차원 배열이라고 한다.
+             * C#에서 배열을 선언할 때는 콤마를 기준으로 차원을 구분한다.
+             */
+
+            int[] oneArray = new int[2] { 1, 2 };
+            //2차원 배열  element 담을 수 있는게 2개있다.  , element 2개 담을 수 있다.
+            int[,] twoArray = new int[2, 2] { { 1, 2 }, { 3, 4 } };
+
+            //2차원 배열  element 담을 수 있는게 2개있다.  , element 3개 담을 수 있다.
+            int[,] twoArray2 = new int[2, 3] { { 1, 2, 3 }, { 4, 5, 6 } };
+
+            //2차원 배열  element 담을 수 있는게 3개있다.  , element 2개 담을 수 있다.
+            int[,] twoArray3 = new int[3, 2] { { 1, 2}, { 4, 5 }, { 7 , 8} };
+
+            //3차원 배열
+            // element 담겨 있는게 2개 있다, element 담을 수 있는게 2개있다.  , element 2개 담을 수 있다.
+            int[,,] threeArray = new int[2, 2, 2] {
+                { { 1, 2 }, { 3, 4 } },
+                { { 1, 2 }, { 3, 4 } }
+            };
+
+            // 3행 3열짜리 배열에서 행과 열이 같으면 1, 다르면 0 출력
+            //twoArray = new int[3, 3];
+
+            //for(int y = 0; y < 3; y++)
+            //{
+            //    for(int x = 0; x < 3; x++)
+            //    {
+            //        if(x == y ) { 
+            //            twoArray[y, x] = 1;
+            //            Console.Write("{0} ", twoArray[y, x]);
+            //        }
+            //        else { 
+            //            twoArray[y, x] = 0;
+            //            Console.Write("{0} ", twoArray[y, x]);
+            //        }
+            //    }
+            //    Console.WriteLine();
+
+            //} // loop : 값을 대입하는 루프
+
+
+            //for (int y = 0; y <= twoArray.GetUpperBound(0); y++)
+            //{
+            //    for (int x = 0; x <= twoArray.GetUpperBound(1); x++)
+            //    {
+            //        if (x == y)
+            //        {
+            //            twoArray[y, x] = 1;
+            //            Console.Write("{0} ", twoArray[y, x]);
+            //        }
+            //        else
+            //        {
+            //            twoArray[y, x] = 0;
+            //            Console.Write("{0} ", twoArray[y, x]);
+            //        }
+            //    }
+            //    Console.WriteLine();
+            //} // loop : 값을 대입하는 루프
+
+
+            /**
+             * 가변 배열
+             * 차원이 2개 이상인 배열은 다차원 배열이고, 배열 길이가 가변 길이인 배열은 가변 배열이라고 한다.
+             */
+
+            // 맨 앞 배열 2개 픽스하고 맨 뒤 배열은 가변적으로 하겠다.
+            //int[][] zagArray = new int[2][];
+            //zagArray[0] = new int[2] { 1, 2 };
+            //zagArray[1] = new int[3] { 3, 4, 5 };
+
+            //for(int y = 0; y < 2; y++)
+            //{
+            //    // 가변 배열 쓸때는 Length 길이 가져옴
+            //    for(int x = 0; x < zagArray[y].Length; x++)
+            //    {
+            //        Console.Write("{0} ", zagArray[y][x]);
+            //    }
+            //    Console.WriteLine();
+            //}
+
+
+            // 예제
+            //int[] intArray;             // int 형 데이터 타입의 intArray 라는 배열을 선언
+            //intArray = new int[3];      // int 형 데이터 타입의 변수를 3개 메모리에 할당
+
+            //intArray[0] = 1;            // intArray 0번째 인덱스에 1이라는 정수값을 대입
+            //intArray[1] = 2;            // intArray 1번째 인덱스에 2이라는 정수값을 대입
+            //intArray[2] = 3;            // intArray 2번째 인덱스에 3이라는 정수값을 대입
+
+            //// 배열 직접 출력해본다.
+            //for (int index = 0; index < 3; index++)
+            //{
+            //    Console.WriteLine("{0} 번째 인덱스의 값 -> {1}", index, intArray[index]);
+            //} // loop : 3번 도는 루프
+            //Console.WriteLine();
+            //Console.WriteLine();
+            //Console.WriteLine();
+
+            //// intArray 배열에서 int 형 데이터 타입의 값을 하나씩 뽑아서 index에 저장 할거임.
+            //foreach(int index in intArray)
+            //{
+            //    Console.WriteLine("intArray 배열에서 뽑아온 값 -> {0}", index);
+            //} // loop : intArray 배열의 길이만큼 도는 루프
+
+
+
+            // 예제 2
+            /** 
+             * 배열을 사용하여 국어 점수의 총점과 평균 구하기
+             * 학생 3명의 점수를 저장하는 배열을 선언해서, 각 학생별로 점수를 할당하고(범위는 1~100 점)
+             * 모든 점수의 총점과 평균을 구해서 출력하는 프로그램
+             * 
+             * -> user input 받아서 프로그램 작성 해볼 것.
+             * - 유저 인풋은 3회 (3명의 학생이니까)
+             * - 점수 범위는 1 ~ 100
+             * - 이상한 입력 예외처리
+             */
+
+            //int[] gugeVal = new int[3];
+
+            //Console.Write("첫 번째 학생의 국어 점수를 입력하시오 (1~100 사이): ");
+            //// 문자열을 int로
+            //int.TryParse(Convert.ToString(Console.ReadLine()), out gugeVal[0]);
+
+            //Console.Write("두 번째 학생의 국어 점수를 입력하시오 (1~100 사이): ");
+            //int.TryParse(Convert.ToString(Console.ReadLine()), out gugeVal[1]);
+
+            //Console.Write("세 번째 학생의 국어 점수를 입력하시오 (1~100 사이): ");
+            //int.TryParse(Convert.ToString(Console.ReadLine()), out gugeVal[2]);
+
+            //if ( 0 < gugeVal[0] && gugeVal[0] < 100+1)
+            //{
+            //    /* Do Nothing */
+            //}
+            //else
+            //{
+            //    Console.WriteLine("첫 번째 값은 이상한 입력 입니다. 다시 국어 점수를 입력해주세요.");
+            //    Console.Write("첫 번째 학생의 국어 점수를 입력하시오 (1~100 사이): ");
+            //    gugeVal[0] = Convert.ToInt32(Console.ReadLine());
+            //}
+
+            //if (0 < gugeVal[1] && gugeVal[1] < 100 + 1)
+            //{
+            //    /* Do Nothing */
+            //}
+            //else
+            //{
+            //    Console.WriteLine("두 번째 값은 이상한 입력 입니다. 다시 국어 점수를 입력해주세요.");
+            //    Console.Write("두 번째 학생의 국어 점수를 입력하시오 (1~100 사이): ");
+            //    gugeVal[1] = Convert.ToInt32(Console.ReadLine());
+            //}
+
+            //if (0 < gugeVal[2] && gugeVal[2] < 100 + 1)
+            //{
+            //    /* Do Nothing */
+            //}
+            //else
+            //{
+            //    Console.WriteLine("세 번째 값은 이상한 입력 입니다. 다시 국어 점수를 입력해주세요.");
+            //    Console.Write("세 번째 학생의 국어 점수를 입력하시오 (1~100 사이): ");
+            //    gugeVal[2] = Convert.ToInt32(Console.ReadLine());
+            //}
+
+            //int guguValAdd = gugeVal[0] + gugeVal[1] + gugeVal[2];
+            //float guguValAvr = (float)(guguValAdd / gugeVal.Length );
+
+            //Console.WriteLine("학생들의 국어 점수 총점은 : {0}", guguValAdd);
+            //Console.WriteLine("학생들의 국어 점수 평균은 : {0}", guguValAvr);
+
+
+            /**
+             * LAB 1.
+             * 배열에서 최대값 찾기
+             * 크기가 100인 배열을 1부터 100사이의 난수로 채우고 배열 요소 중에서 최대값을 찾는 프로그램 작성.
+             * 
+             * - 보기 좋게 출력(가독성 높아야함)
+             * - 이상한 입력 예외처리
+             * 
+             */
+
+
+            // MaxArray1 이라는 배열 100 칸을 만듭니다.
+            //int[] MaxArray1 = new int[100];
+
+            // Arraycount의 값을 0 선언하고, 100보다 작을 동안 반복 합니다. 반복이 끝날때마다 값을 1 더합니다.
+            //for (int Arraycount = 0; Arraycount < 100; Arraycount++)
+            //{
+            //    // Number1 난수를 생성합니다.
+            //    Random Number1 = new Random();
+                  //// Number1Val 변수에 0~100 까지의 난수 값을 선언합니다.
+            //    int Number1Val = Number1.Next(0, 100 + 1);
+
+                  // 
+            //    MaxArray1[Arraycount] += Number1Val;
+            //}
+
+            //Console.WriteLine("================================================");
+            //Console.WriteLine("MaxArray1 내의 배열 값들 입니다.");
+            //Console.WriteLine("================================================");
+
+
+            // maxArrayGps : MaxArray1의 위치를 0부터 차례대로 하기 위해 변수 값 0을 선언
+            //int maxArrayGps = 0;
+
+            //// 10줄 씩 배열 표현
+            //for (int maxArraycount = 1; maxArraycount < 100+1; maxArraycount++)
+            //{
+            //    Console.Write("{0} \t|", MaxArray1[maxArrayGps]);
+
+            //    maxArrayGps++;
+
+            //    if (maxArraycount % 10 == 0)
+            //    {
+            //        Console.WriteLine();
+            //    }
+            //    else { /* DO Nothing */ }
+            //}
+
+            //// 최대값 찾기
+
+            //int maxVal = MaxArray1.Max();
+            //Console.WriteLine("================================================");
+            //Console.WriteLine("================================================");
+
+            //Console.WriteLine("현재 MaxArray1 내의 최대값은 {0} 입니다.", maxVal);
+
+            //Console.WriteLine("================================================");
+            //Console.WriteLine("================================================");
+
+
+
+
+
+            /**
+             * LAB 2.
+             * 사과를 제일 좋아하는 사람찾기
+             * 사람들 5명 (사람1, 사람2, ..., 사람5)에게 아침에 먹는 사과 개수를 입력하도록 요청하는 프로그램 작성
+             * 데이터 입력이 마무리되면 누가 가장 많은 사과를 아침으로 먹었는지 출력한다.
+             * 
+             * - 이상한 입력 예외처리
+             * - 제일 적게 먹은 사람도 찾도록 수정해보기(변형 1)
+             * 
+             * - 먹은 사과의 개수 순으로 정렬. 
+             *   정렬 알고리즘은 본인이 사용가능한 것으로 하되. 형태는 아래와 같음.
+             *   알고리즘을 잘 모르겠다면 버블 정렬을 도전해볼 것.(변형 2)
+             *   
+             * - 알고리즘을 잘 알겠다면 Merge sort 도전 해볼 것(변형 3) 
+             *      - 정렬 도전 시 유저 입력 X
+             *      - 데이터는 난수로 100~1000개 정도의 값
+             *      - 중복 제거
+             *      - 시간초는 전혀 상관 없음
+             *      
+             * - 본인의 능력껏 기본형, 변형 1, 변형 2, 여러운 거 난이도 순서로 도전해 볼 것.
+             */
+
+            ////사과 개수 저장할 배열 선언
+            //int[] Applepeoples = new int[5];
+
+
+            //int countPeople = 0;
+            //int Peoplecount = 1;
+
+            //while (countPeople < 5)
+            //{
+            //    Console.Write("{0} 번째 사람의 아침 사과 먹은 개수를 입력하시오 (0보다 커야합니다.): ", Peoplecount);
+            //    int.TryParse(Console.ReadLine(), out Applepeoples[countPeople]);
+
+            //    Console.WriteLine();
+
+            //    while (true)
+            //    {
+            //        bool check1 = 0 < Applepeoples[countPeople];
+
+            //        // if : 변수 check1의 값이 참이면 실행 
+            //        if (check1)
+            //        {
+            //            break;
+            //        }
+            //        else
+            //        {
+            //            Console.WriteLine("{0} 번째 값은 이상한 입력 입니다. 다시 아침에 먹은 사과 개수를 입력해주세요.", Peoplecount);
+            //            Console.Write("{0} 번째 사람의 아침 사과 먹은 개수를 입력하시오 (0보다 커야합니다.): ", Peoplecount);
+            //            int.TryParse(Console.ReadLine(), out Applepeoples[countPeople]);
+            //        }
+            //        Console.WriteLine();
+            //    }
+
+
+            //    Peoplecount++;
+            //    countPeople++;
+            //}
+
+            //// 최대값 찾기
+
+            ////int maxVal2 = Applepeoples.Max();
+
+            //int maxVal2 = 0;
+            //int minVal2 = Applepeoples[0];
+
+            //for (int i = 0; i < Applepeoples.Length; i++)
+            //{
+            //    // 최솟값 구하기
+            //    if (minVal2 > Applepeoples[i])
+            //    {
+            //        minVal2 = Applepeoples[i];
+            //    }
+            //    else { /* Do Nothing */ }
+
+            //    // 최댓값 구하기
+            //    if(maxVal2 < Applepeoples[i])
+            //    {
+            //        maxVal2 = Applepeoples[i];
+            //    }
+            //    else { /* Do Nothing */ }
+
+            //}
+
+
+            //Console.WriteLine("================================================");
+            //Console.WriteLine("================================================");
+
+
+            //Console.WriteLine("현재 사과를 가장 많이 먹은 개수는 {0} 입니다.", maxVal2);
+
+
+            /*  
+             *  제일 적게 먹은 사람도 찾도록 수정해보기(변형 1)
+             */
+            //최솟값
+            //int minVal2 = Applepeoples.Min();
+
+
+            //Console.WriteLine("================================================");
+            //Console.WriteLine("================================================");
+
+            //Console.WriteLine("현재 사과를 가장 적게 먹은 개수는 {0} 입니다.", minVal2);
+
+            //Console.WriteLine("================================================");
+            //Console.WriteLine("================================================");
+
+            //Console.WriteLine("아침 사과를 먹은 개수 순 입니다.");
+            //foreach (int Applepeocount in Applepeoples)
+            //{
+            //    Console.Write("{0} \t|", Applepeocount);
+            //}
+
+            //Console.WriteLine();
+            //Console.WriteLine("================================================");
+            //Console.WriteLine("================================================");
+
+            /**
+             *  - 먹은 사과의 개수 순으로 정렬. 
+             *    정렬 알고리즘은 본인이 사용가능한 것으로 하되. 형태는 아래와 같음.
+             *    알고리즘을 잘 모르겠다면 버블 정렬을 도전해볼 것.(변형 2)
+             */
+
+
+            //// 배열 길이를 정수 값으로 넣을 변수 선언
+            //int AppleLen = Applepeoples.Length;
+
+
+            //버블 정렬
+            // 잠시 큰 값을 저장할 변수 선언
+            //int AppleVal5 = 0;
+
+            //for(int i = 0; i < Applepeoples.Length; i++)
+            //{
+            //    for (int j = i + 1; j < Applepeoples.Length; j++)
+            //    {
+            //        if(Applepeoples[i] > Applepeoples[j])
+            //        {
+            //            AppleVal5 = Applepeoples[i];
+
+            //            Applepeoples[i] = Applepeoples[j];
+
+            //            Applepeoples[j] = AppleVal5;
+            //        }
+            //    }
+            //}
+
+
+
+
+            //// 선택 정렬 (SORT) 알고리즘 :  데이터 하나를 기준으로 나머지 데이터와 비교하여
+            //// 가장 작거나 큰 데이터와 자리를 바꾸는 식으로 반복해서 비교하는 정렬 방법
+            //for (int sortcount1 = 0; sortcount1 < AppleLen - 1; sortcount1++)
+            //{
+            //    for (int sortcount2 = sortcount1 + 1; sortcount2 < AppleLen; sortcount2++)
+            //    {
+
+            //        // 오름차순으로 짠 조건문
+            //        if (Applepeoples[sortcount1] > Applepeoples[sortcount2])
+            //        {
+            //            // Applepeoples[sortcount1] 값이 Applepeoples[sortcount2] 보다 크다.
+            //            // Applepeoples[sortcount1] 값을 정수형 변수인 Appleprint에 값을 넣고,
+            //            int Appleprint = Applepeoples[sortcount1];
+
+            //            // Applepeoples[sortcount2] 값을 Applepeoples[sortcount1]에 선언한다.
+            //            Applepeoples[sortcount1] = Applepeoples[sortcount2];
+
+            //            // Appleprint 값을 Applepeoples[sortcount2]에 선언한다.
+            //            Applepeoples[sortcount2] = Appleprint;
+            //        }
+            //        else { /* Do Nothing */ }
+            //    }
+            //}
+
+            //Console.WriteLine("오름차순으로 정렬한 아침 사과를 먹은 개수 순 입니다.");
+
+            //for (int sortcount1 = 0; sortcount1 < Applepeoples.Length; sortcount1++)
+            //{
+            //    Console.Write("{0} \t|", Applepeoples[sortcount1]);
+            //}
+            //Console.WriteLine();
+
+
+            /**
+             * 알고리즘을 잘 알겠다면 Merge sort 도전 해볼 것(변형 3) 
+             * - 정렬 도전 시 유저 입력 X
+             * - 데이터는 난수로 100~1000개 정도의 값 (count는 100~1000개, value range는 임의로)
+             * - 중복 제거
+             * - 시간초는 전혀 상관 없음
+             */
+
+            int[] Applepeoples2 = new int[150];
+
+            Random Number2 = new Random();
+
+            for (int Arraycount2 = 0; Arraycount2 < 150; Arraycount2++)
+            {
+
+                int Number1Val2 = Number2.Next(0, 150 + 1);
+
+                Applepeoples2[Arraycount2] += Number1Val2;
+            }
+
+            int[] Applepeoples3 = new int[150];
+            int count1 = 0;
+
+            for (int i = 0; i < Applepeoples2.Length; i++)
+            {
+                bool flag = false;
+                for (int j = 0; j < Applepeoples3.Length; j++)
+                {
+                    if (Applepeoples2[i] == Applepeoples3[j])
+                    {
+                        flag = true;
+                    }
+
+                    if (flag == false)
+                    {
+                        Applepeoples3[count1] = Applepeoples2[i];
+                    }
+                }
+            }
+
+
+
+
+            //int ArrayLen2 = Applepeoples2.Length;
+
+            //for (int count3 = 0; count3 < ArrayLen2 - 1; count3++)
+            //{
+            //    for (int count4 = count3 + 1; count4 < ArrayLen2; count4++)
+            //    {
+            //        if (ApplepeoplesDels[count3] > ApplepeoplesDels[count4])
+            //        {
+            //            int SetNumber1 = ApplepeoplesDels[count3];
+
+            //            ApplepeoplesDels[count3] = ApplepeoplesDels[count4];
+
+            //            ApplepeoplesDels[count4] = SetNumber1;
+            //        }
+            //        else { /* Do Nothing */}
+            //    }
+            //}
+
+
+
+            int appleArraycount2 = 1;
+
+            foreach (int appleArray2 in Applepeoples3)
+            {
+
+                Console.Write("{0} \t|", appleArray2);
+
+                if (appleArraycount2 % 10 == 0)
+                {
+                    Console.WriteLine();
+                }
+                else { /* DO Nothing */ }
+
+                appleArraycount2++;
+            }
+
+
+
+            // 선택 정렬 (SORT) 알고리즘 :  데이터 하나를 기준으로 나머지 데이터와 비교하여
+            // 가장 작거나 큰 데이터와 자리를 바꾸는 식으로 반복해서 비교하는 정렬 방법
+            for (int sortcount1 = 0; sortcount1 < Applepeoples3.Length - 1; sortcount1++)
+            {
+                for (int sortcount2 = sortcount1 + 1; sortcount2 < Applepeoples3.Length; sortcount2++)
+                {
+
+                    // 오름차순으로 짠 조건문
+                    if (Applepeoples3[sortcount1] > Applepeoples3[sortcount2])
+                    {
+                        // Applepeoples[sortcount1] 값이 Applepeoples[sortcount2] 보다 크다.
+                        // Applepeoples[sortcount1] 값을 정수형 변수인 Appleprint에 값을 넣고,
+                        int Appleprint = Applepeoples3[sortcount1];
+
+                        // Applepeoples[sortcount2] 값을 Applepeoples[sortcount1]에 선언한다.
+                        Applepeoples3[sortcount1] = Applepeoples3[sortcount2];
+
+                        // Appleprint 값을 Applepeoples[sortcount2]에 선언한다.
+                        Applepeoples3[sortcount2] = Appleprint;
+                    }
+                    else { /* Do Nothing */ }
+                }
+            }
+
+            Console.WriteLine("오름차순으로 정렬한 아침 사과를 먹은 개수 순 입니다.");
+
+            for (int sortcount1 = 0; sortcount1 < Applepeoples3.Length; sortcount1++)
+            {
+                Console.Write("{0} \t|", Applepeoples3[sortcount1]);
+            }
+            Console.WriteLine();
+
+
+
+            //int[] ApplepeoplesDels = Applepeoples2.Distinct().ToArray();
+
+            //// Sort 해주는 실행문
+            //Array.Sort(ApplepeoplesDels);
 
         }
     }
