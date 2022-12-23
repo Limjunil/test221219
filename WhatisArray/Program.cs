@@ -1047,8 +1047,11 @@ namespace WhatisArray
             //}
 
 
-            //// 모드(Mod) 연산
+            //// 모드(Mod) 연산 : 나머지 값이 나온다.
+            //Console.WriteLine("모드 연산");
             //int number = 1_0822;
+            //Console.WriteLine($"{number}");
+
             //Console.WriteLine("64로 Mod 연산 : {0}", number % 64);
 
             /**
