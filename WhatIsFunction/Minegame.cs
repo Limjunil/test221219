@@ -20,11 +20,11 @@ namespace WhatIsFunction
 
             Random randomMine = new Random(); // 난수 생성 함수
             const int MINE_PERCENTAGE = 30;  // 지뢰의 생성 확률 30을 위해 30 값 선언
-            const int BOARD_SIZE_X = 5;   // 보드의 가로 크기
-            const int BOARD_SIZE_Y = 5;   // 보드의 세로 크기
+            const int BOARD_SIZE_X = 10;   // 보드의 가로 크기
+            const int BOARD_SIZE_Y = 10;   // 보드의 세로 크기
 
-            bool isDebugMode = true;
-            bool isGameOver = false;
+            bool isDebugMode = true; // 디버깅 모드
+            bool isGameOver = false; // 게임 종료
             bool isPlayerWin = false;
             int playerTurnCnt = 0;
 
