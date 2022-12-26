@@ -20,10 +20,10 @@ namespace WhatIsFunction
 
             Random randomMine = new Random(); // 난수 생성 함수
             const int MINE_PERCENTAGE = 30;  // 지뢰의 생성 확률 30을 위해 30 값 선언
-            const int BOARD_SIZE_X = 10;   // 보드의 가로 크기
-            const int BOARD_SIZE_Y = 10;   // 보드의 세로 크기
+            const int BOARD_SIZE_X = 5;   // 보드의 가로 크기
+            const int BOARD_SIZE_Y = 5;   // 보드의 세로 크기
 
-            bool isDebugMode = false;
+            bool isDebugMode = true;
             bool isGameOver = false;
             bool isPlayerWin = false;
             int playerTurnCnt = 0;
@@ -195,6 +195,34 @@ namespace WhatIsFunction
                 } // if : 지뢰를 선택한 경우
                 else
                 {
+                    // { 선택한 타일 인근 9칸의 숫자를 오픈한다.
+                    bool isSearchTileValid = false;
+
+                    for (int searchY = playerY - 1; searchY <= playerY + 1; searchY++)
+                    {
+                        for (int searchX = playerX - 1; searchX <= playerX + 1; searchX++)
+                        {
+                            // 유효하지 않는 좌표는 패스한다.
+                            isSearchTileValid =
+                                (0 <= searchX && searchX < BOARD_SIZE_X) &&
+                                (0 <= searchY && searchY < BOARD_SIZE_Y);
+
+                            if (isSearchTileValid == false) { continue; }
+
+                            if (mineCntMap[searchY, searchX].Equals(-1))
+                            {
+                                playBoard[searchY, searchX] = -2;
+
+                            } // if : 지뢰인 경우
+
+                            else
+                            {
+                                playBoard[searchY, searchX] = mineCntMap[searchY, searchX];
+                            } // else : 지뢰 아닌 경우
+                        }
+                    } // loop : 선택한 타일 인근 9칸을 순회하는 루프
+                    // } 선택한 타일 인근 9칸의 숫자를 오픈한다.
+
 
                 } // else : 지뢰가 아닌, 빈 타일을 선택한 경우
 
@@ -202,10 +230,123 @@ namespace WhatIsFunction
                 // } 선택한 좌표에서 지뢰를 검사한다.
 
 
+                // { 게임 승리 조건을 검사한다.
+                int unknownTileCnt = 0;
+                for(int y = 0; y < BOARD_SIZE_Y; y++)
+                {
+                    // 오픈되지 않은 타일이 있는 경우 게임을 이어서 진행한다.
+                    if(0 < unknownTileCnt) { break; }
+
+
+                    for (int x = 0; x < BOARD_SIZE_X; x++)
+                    {
+                        // 오픈되지 않은 타일이 있을 경우 게임을 이어서 진행한다.
+                        if (0 < unknownTileCnt) { break; }
+
+                        if (playBoard[y, x].Equals(-1) &&
+                            mineCntMap[y, x].Equals(-1) == false )
+                        {
+                            unknownTileCnt++;
+                        } // if : 아직 오픈할 타일이 존재하고, 해당 타일이 지뢰가 아닌 경우
+                    }
+                } // loop : 플레이 보드를 순회하는 루프
+
+
+                if (unknownTileCnt.Equals(0))
+                {
+                    isGameOver = true;
+                    isPlayerWin = true;
+                }
+
+                // } 게임 승리 조건을 검사한다.
+
+
+                // { 게임 종료 조건을 검사한다.
+                if (isGameOver) { break; }
+
+                // } 게임 종료 조건을 검사한다.
+
+                if (isDebugMode)
+                {
+                    // { 현재 보드의 상태를 숫자 지도로 보여준다.
+                    Console.WriteLine();
+
+                    for(int y = 0; y < BOARD_SIZE_Y; y++)
+                    {
+                        for (int x = 0; x < BOARD_SIZE_X; x++)
+                        {
+                            Console.Write("{0} ", mineCntMap[y, x]);
+                        }
+                        Console.WriteLine();
+                    } // loop : 현재 보드의 상태를 출력
+
+                    // } 현재 보드의 상태를 숫자 지도로 보여준다.
+
+                    // { 현재 게임 보드의 상태를 보여준다.
+                    Console.WriteLine();
+
+                    for(int y = 0; y < BOARD_SIZE_Y; y++)
+                    {
+                        for (int x = 0; x < BOARD_SIZE_X; x++)
+                        {
+                            if (gameBoard[y, x] < MINE_PERCENTAGE)
+                            {
+                                Console.Write("# ");
+                            }
+                            else
+                            {
+                                Console.Write(". ");
+                            }
+                        }
+                        Console.WriteLine();
+                    } // loop : 현재 게임 보드의 상태를 출력하는 루프
+                    Console.WriteLine();
+                    // } 현재 게임 보드의 상태를 보여준다.
+
+
+                } // if : 디버그 모드에서 출력
+
 
             } // loop : 게임 루프
 
+            // { 현재 보드의 상태를 플레이 시점으로 보여준다.
+            Console.WriteLine();
 
-        }
+            for (int y = 0; y < BOARD_SIZE_Y; y++)
+            {
+                for (int x = 0; x < BOARD_SIZE_X; x++)
+                {
+                    switch (playBoard[y, x])
+                    {
+                        case -2:
+                            Console.Write("X".PadRight(3, ' '));
+                            break;
+                        case -1:
+                            Console.Write("□".PadRight(2, ' '));
+                            break;
+                        case 0:
+                            Console.Write("■".PadRight(2, ' '));
+                            break;
+                        default:
+                            Console.Write("{0}".PadRight(5, ' '), playBoard[y, x]);
+                            break;
+                    } // switch
+                }
+                Console.WriteLine();
+            } // loop : 현재 보드의 상태를 플레이 시점으로 출력하는 루프
+            Console.WriteLine();
+            // } 현재 보드의 상태를 플레이 시점으로 보여준다.
+
+            if (isPlayerWin)
+            {
+                Console.WriteLine("[플레이어] 지뢰를 모두 찾고 승리했습니다.");
+            }
+            else
+            {
+                Console.WriteLine("[플레이어] 지뢰를 밟고 패배했습니다.");
+            }
+
+
+        }  // Main()
     }
 }
