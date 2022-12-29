@@ -136,6 +136,7 @@ namespace Work221228
                 {
                     Console.WriteLine("[아무 키나 입력하면 다음으로 넘어갑니다.]");
                     int.TryParse(Console.ReadLine(), out CheckPass);
+                    Console.Clear();
                 }
 
                 
