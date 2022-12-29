@@ -19,6 +19,11 @@ namespace WhatIsClass
         private int[] trumpCardSet; // 내가 사용할 카드 세트
         private string[] trumpCardMark; // 트럼프 카드의 마크
 
+        public TrumpCard()
+        {
+            SetupTrumpCards();
+        }
+
         public void SetupTrumpCards()
         {
             trumpCardSet = new int[52];
