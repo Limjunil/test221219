@@ -141,9 +141,11 @@ namespace Work221230
                                     }
                                     break;
                                 case 0:
+                                    // 플레이어의 보는 방향 설정
                                     Console.Write("▲".PadRight(2, ' '));
                                     break;
                                 case 1:
+                                    // 플레이어의 위치에서 2 또는 -2 값을 보고 설정한다.
                                     if (2 >= player_Gps0 - y && player_Gps0 - y >= -2)
                                     {
                                         if (2 >= player_Gps1 - x && player_Gps1 - x >= -2)
@@ -393,6 +395,9 @@ namespace Work221230
 
                         if (ZerooneCheck == 0) { /* Do Nothing */ }
                         else if (ZerooneCheck == 1) { /* Do Nothing */ }
+                        else if (ZerooneCheck == 2) { /* Do Nothing */ }
+                        else if (ZerooneCheck == 3) { /* Do Nothing */ }
+                        else if (ZerooneCheck == 4) { /* Do Nothing */ }
 
                         else
                         {
