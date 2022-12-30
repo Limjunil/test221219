@@ -17,13 +17,13 @@ namespace Work221229
             PlayerOne player_ = new PlayerOne();
 
             Pig pig_ = new Pig();
-            string pigItem = pig_.MonsterDrop();
+            string pigItem = pig_.MonsterItems;
 
             Golem golem_ = new Golem();
-            string golemItem = golem_.MonsterDrop();
+            string golemItem = golem_.MonsterItems;
 
             Bear bear_ = new Bear();
-            string bearItem = bear_.MonsterDrop();
+            string bearItem = bear_.MonsterItems;
 
             int NowPlayerHP = player_.HpVal();
 
@@ -33,6 +33,15 @@ namespace Work221229
             {
                 NowPlayerHP = battle_monster.BattleLst(NowPlayerHP);
                 iTEM_Count = battle_monster.ItemThree(iTEM_Count);
+
+                if( NowPlayerHP <= 0)
+                {
+                    Console.WriteLine("===============================");
+                    Console.WriteLine("체력이 0 이하로 떨어졌습니다.\n패배했습니다.");
+                    Console.WriteLine("===============================");
+
+                    break;
+                }
 
                 if (iTEM_Count == 3)
                 {

@@ -8,8 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Program.cs" />
-    <Compile Remove="Program2.cs" />
     <Compile Remove="WhatIsClass.cs" />
   </ItemGroup>
 

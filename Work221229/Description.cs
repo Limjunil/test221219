@@ -15,13 +15,14 @@ namespace Work221229
      * - Monster 클래스를 상속 받은 서로 다른 3 종류의 몬스터를 구현하기
      */
 
+    //! 프로퍼티 이용해봄
     class MyMonster
     {
-        protected string name;
-        public int hp;
+        protected string name = string.Empty;       //!< 
+        protected int hp;
         protected int damage;
         protected int defence;
-        protected string MonsterItem;
+        protected string MonsterItem = string.Empty;
 
 
         public void TextLine(string name, int hp, int damage, int defence)
@@ -34,34 +35,77 @@ namespace Work221229
         }
 
 
-        public string Monstername()
+        //public string Monstername()
+        //{
+        //    return this.name;
+        //}
+
+        public string Name
         {
-            return this.name;
+            get { return this.name; }
+
+            // private 로 보호한다.
+            private set { this.name = value; }
         }
 
-        public int HpVal()
+        public int Hp
         {
-            return this.hp;
-        }
-        public int AttackVal()
-        {
-            return this.damage;
+            get { return this.hp; }
+
+            // private 로 보호한다.
+            private set { this.hp = value; }
         }
 
-        public int DefenceVal()
+        //public int HpVal()
+        //{
+        //    return this.hp;
+        //}
+        //public int AttackVal()
+        //{
+        //    return this.damage;
+        //}
+
+        public int Attacks
         {
-            return this.defence;
+            get { return this.damage; }
+
+            // private 로 보호한다.
+            private set { this.damage = value; }
         }
 
-        public string MonsterDrop()
+        //public int DefenceVal()
+        //{
+        //    return this.defence;
+        //}
+        public int Defence
         {
-            return this.MonsterItem;
+            get { return this.defence; }
+
+            // private 로 보호한다.
+            private set { this.defence = value; }
         }
+
+        //public string MonsterDrop()
+        //{
+        //    return this.MonsterItem;
+        //}
+
+        public string MonsterItems
+        {
+            get { return this.MonsterItem; }
+
+            // private 로 보호한다.
+            private set { this.MonsterItem = value; }
+        }
+
+
 
     }
 
     class Pig : MyMonster
     {
+
+        
         public Pig()
         {
             this.name = "갈색 돼지";
@@ -71,6 +115,7 @@ namespace Work221229
             this.MonsterItem = "돼지고기";
 
         }
+
 
 
     }
@@ -100,6 +145,8 @@ namespace Work221229
         }
     }
 
+
+    // 프로퍼티 이용 안함
     class Player
     {
         protected string name;
@@ -208,11 +255,11 @@ namespace Work221229
 
 
 
-            monster[0] = monsterKind.HpVal();
+            monster[0] = monsterKind.Hp;
 
-            monster[1] = monsterKind.AttackVal();
-            monster[2] = monsterKind.DefenceVal();
-            monsterName = monsterKind.Monstername();
+            monster[1] = monsterKind.Attacks;
+            monster[2] = monsterKind.Defence;
+            monsterName = monsterKind.Name;
 
 
 
@@ -386,7 +433,7 @@ namespace Work221229
 
                         if (randomVal_ == 1)
                         {
-                            if (playItem[0] == monsterKind.MonsterDrop())
+                            if (playItem[0] == monsterKind.MonsterItems)
                             {
                                 Console.WriteLine("===============================");
 
@@ -399,7 +446,7 @@ namespace Work221229
                             }
                             else
                             {
-                                playItem[0] = monsterKind.MonsterDrop();
+                                playItem[0] = monsterKind.MonsterItems;
                                 Console.WriteLine("===============================");
 
                                 Console.WriteLine();
@@ -413,7 +460,7 @@ namespace Work221229
                         else if (randomVal_ == 2)
                         {
 
-                            if (playItem[1] == monsterKind.MonsterDrop())
+                            if (playItem[1] == monsterKind.MonsterItems)
                             {
                                 Console.WriteLine("===============================");
 
@@ -426,7 +473,7 @@ namespace Work221229
                             }
                             else
                             {
-                                playItem[1] = monsterKind.MonsterDrop();
+                                playItem[1] = monsterKind.MonsterItems;
                                 Console.WriteLine("===============================");
 
                                 Console.WriteLine();
@@ -439,7 +486,7 @@ namespace Work221229
                         }
                         else
                         {
-                            if (playItem[2] == monsterKind.MonsterDrop())
+                            if (playItem[2] == monsterKind.MonsterItems)
                             {
                                 Console.WriteLine("===============================");
 
@@ -452,7 +499,7 @@ namespace Work221229
                             }
                             else
                             {
-                                playItem[2] = monsterKind.MonsterDrop();
+                                playItem[2] = monsterKind.MonsterItems;
                                 Console.WriteLine("===============================");
 
                                 Console.WriteLine();
