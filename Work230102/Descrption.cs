@@ -934,13 +934,13 @@ namespace Work230102
                         {
                             ComputerNotpeir = i + 1;
                         }
+                        else { /* Do Nothing */ }
 
                         if (i == 0 || i == 13)
                         {
                             if (i == 0)
-                            {
+                            { /* Do Nothing */ }
 
-                            }
                             else
                             {
                                 ComputerNotpeir = 14;
@@ -962,11 +962,9 @@ namespace Work230102
                                     CheckCompTwoPeir++;
 
 
-                                    if (CheckCompTwoPeir == 2)
+                                    if (2 <= CheckCompTwoPeir)
                                     {
                                         ComputerTwo = 14;
-
-                                        CheckCompTwoPeir--;
                                     }
 
                                 }
@@ -996,18 +994,14 @@ namespace Work230102
 
                                 CheckCompTwoPeir++;
 
-                                if (CheckCompTwoPeir == 2)
+                                if (2 <= CheckCompTwoPeir)
                                 {
                                     ComputerTwo = i + 1;
-
-                                    CheckCompTwoPeir--;
                                 }
 
                             }
                             else
-                            {
-                                
-                            }
+                            { /* Do Nothing */ }
                         }
                     }
 
@@ -1018,16 +1012,14 @@ namespace Work230102
                         if (0 < CheckPlayer[i])
                         {
                             PlayerNotpeir = i + 1;
-                        }
+                        } else { /* Do Nothing */ }
 
                         if (i == 0 || i == 13)
                         {
                             
 
                             if (i == 0)
-                            {
-                                
-                            }
+                            { /* Do Nothing */ }
                             else
                             {
                                 
@@ -1049,18 +1041,14 @@ namespace Work230102
                                     CheckCompTwoPeir++;
 
 
-                                    if (CheckPlayTwoPeir == 2)
+                                    if (2 <= CheckPlayTwoPeir)
                                     {
                                         PlayerTwo = 14;
-
-                                        CheckPlayTwoPeir--;
                                     }
 
                                 }
                                 else
-                                {
-
-                                }
+                                { /* Do Nothing */ }
 
                             }
                         }
@@ -1083,17 +1071,14 @@ namespace Work230102
 
                                 CheckPlayTwoPeir++;
 
-                                if (CheckPlayTwoPeir == 2)
+                                if (2 <= CheckPlayTwoPeir)
                                 {
                                     PlayerTwo = i + 1;
-                                    CheckPlayTwoPeir--;
                                 }
 
                             }
                             else
-                            {
-
-                            }
+                            { /* Do Nothing */ }
                         }
                     }
 
@@ -1134,7 +1119,7 @@ namespace Work230102
                         if (0 < playerCards[i] && playerCards[i] <= 13)
                         {
                             Playerflush[0]++;
-                            
+
 
                         }
                         else if (13 < playerCards[i] && playerCards[i] <= 26)
@@ -1152,7 +1137,7 @@ namespace Work230102
                             Playerflush[3]++;
 
                         }
-
+                        else { /* Do Nothing */ }
                     }
 
 
