@@ -6,14 +6,7 @@ using System.Threading.Tasks;
 
 namespace Work230102
 {
-    public class Descrption
-    {
-
-    } // class Descrption
-
-
-
-
+    
     public class TrumpCard
     {
         /**
@@ -63,6 +56,9 @@ namespace Work230102
 
             switch (cardNumber)
             {
+                case "1":
+                    cardNumber = "A";
+                    break;
                 case "11":
                     cardNumber = "J";
                     break;
@@ -78,13 +74,47 @@ namespace Work230102
 
             } // switch
 
+            if (cardNumber == "10")
+            {
+                Console.Write("".PadLeft(15, ' '));
+                Console.WriteLine(" -----");
+                Console.Write("".PadLeft(15, ' '));
 
-            Console.WriteLine(" ----");
-            Console.WriteLine("|{0}{1} |", cardMark, cardNumber);
-            Console.WriteLine("|    |");
-            Console.WriteLine("| {0}{1}|", cardNumber, cardMark);
-            Console.WriteLine(" ----");
-            Console.WriteLine("뽑은 카드는 {0}{1} 입니다.", cardMark, cardNumber);
+                Console.WriteLine("|{0}{1} |", cardMark, cardNumber);
+                Console.Write("".PadLeft(15, ' '));
+
+                Console.WriteLine("|     |");
+                Console.Write("".PadLeft(15, ' '));
+
+                Console.WriteLine("| {0}{1}|", cardNumber, cardMark);
+                Console.Write("".PadLeft(15, ' '));
+
+                Console.WriteLine(" -----");
+                Console.Write("".PadLeft(7, ' '));
+
+                Console.WriteLine("뽑은 카드는 {0}{1} 입니다.", cardMark, cardNumber);
+            }
+            else
+            {
+                Console.Write("".PadLeft(15, ' '));
+
+                Console.WriteLine(" -----");
+                Console.Write("".PadLeft(15, ' '));
+
+                Console.WriteLine("|{0}{1}  |", cardMark, cardNumber);
+                Console.Write("".PadLeft(15, ' '));
+
+                Console.WriteLine("|     |");
+                Console.Write("".PadLeft(15, ' '));
+
+                Console.WriteLine("|  {0}{1}|", cardNumber, cardMark);
+                Console.Write("".PadLeft(15, ' '));
+
+                Console.WriteLine(" -----");
+                Console.Write("".PadLeft(7, ' '));
+
+                Console.WriteLine("뽑은 카드는 {0}{1} 입니다.", cardMark, cardNumber);
+            }
 
             return card;
 
@@ -95,32 +125,10 @@ namespace Work230102
         public int RollCardValAdd(int ComPLay)
         {
 
-            int cardVal = 0;
+            
             int card = trumpCardSet[ComPLay];
 
-            string cardMark = trumpCardMark[(card - 1) / 13];
-            string cardNumber = Math.Ceiling(card % 13.1).ToString();
-
-            cardVal = (int)Math.Ceiling(card % 13.1);
-
-
-            switch (cardNumber)
-            {
-                case "11":
-                    cardNumber = "J";
-                    break;
-                case "12":
-                    cardNumber = "Q";
-                    break;
-                case "13":
-                    cardNumber = "k";
-                    break;
-                default:
-                    /* Do Nothing*/
-                    break;
-
-            } // switch
-
+            
             return card;
 
         }// RollCard()
@@ -147,6 +155,9 @@ namespace Work230102
 
                 switch (cardNumber[i])
                 {
+                    case "1":
+                        cardNumber[i] = "A";
+                        break;
                     case "11":
                         cardNumber[i] = "J";
                         break;
@@ -164,20 +175,81 @@ namespace Work230102
             }
 
 
-            Console.WriteLine(" ----\t ----");
-            Console.WriteLine("|{0}{1} |\t|{2}{3} |",
-                cardMark[CardValue + 0], cardNumber[CardValue + 0], cardMark[CardValue + 1], cardNumber[CardValue + 1]);
-            Console.WriteLine("|    |\t|    |");
-            Console.WriteLine("| {0}{1}|\t| {2}{3}|",
-                cardNumber[CardValue + 0], cardMark[CardValue + 0], cardNumber[CardValue + 1], cardMark[CardValue + 1]);
-            Console.WriteLine(" ----\t ----");
+
+            Console.Write("".PadLeft(11, ' '));
+            for (int i = 0; i < 2; i++)
+            {
+                Console.Write(" -----".PadRight(7, ' '));
+            }
+            Console.WriteLine();
+
+            Console.Write("".PadLeft(11, ' '));
+
+            for (int i = 0; i < 2; i++)
+            {
+                if (cardNumber[CardValue + i] == "10")
+                {
+                    Console.Write("|{0}{1} |".PadRight(5, ' '), cardMark[CardValue + i], cardNumber[CardValue + i]);
+
+                }
+                else
+                {
+                    Console.Write("|{0}{1}  |".PadRight(5, ' '), cardMark[CardValue + i], cardNumber[CardValue + i]);
+
+                }
+
+            }
+            Console.WriteLine();
+
+            Console.Write("".PadLeft(11, ' '));
+
+            for (int i = 0; i < 2; i++)
+            {
+                Console.Write("|     |".PadRight(5, ' '));
+            }
+            Console.WriteLine();
+
+            Console.Write("".PadLeft(11, ' '));
+
+            for (int i = 0; i < 2; i++)
+            {
+                if (cardNumber[CardValue + i] == "10")
+                {
+                    Console.Write("| {0}{1}|".PadRight(5, ' '), cardNumber[CardValue + i], cardMark[CardValue + i]);
+
+                }
+                else
+                {
+                    Console.Write("|  {0}{1}|".PadRight(5, ' '), cardNumber[CardValue + i], cardMark[CardValue + i]);
+
+                }
+            }
+            Console.WriteLine();
+
+            Console.Write("".PadLeft(11, ' '));
+
+            for (int i = 0; i < 2; i++)
+            {
+                Console.Write(" -----".PadRight(7, ' '));
+            }
+            Console.WriteLine();
+
+          
+
+            Console.WriteLine();
+
+
+            Console.Write("".PadLeft(15, ' '));
 
             for (int i = CardValue; i < CardValue + 2; i++)
             {
-                Console.WriteLine("뽑은 카드는 {0}{1} 입니다.", cardMark[i], cardNumber[i]);
-                Console.WriteLine();
+                Console.Write("{0}{1} ", cardMark[i], cardNumber[i]);
             }
+            Console.WriteLine();
 
+            Console.WriteLine("입니다.".PadLeft(19, ' '));
+
+            Console.WriteLine();
 
         }// RollCard()
 
@@ -187,7 +259,6 @@ namespace Work230102
         {
 
             int[] card = new int[CardValue+5];
-            //int[] cardVal = new int[CardValue+5];
             string[] cardMark = new string[CardValue+5];
             string[] cardNumber = new string[CardValue+5];
 
@@ -199,10 +270,12 @@ namespace Work230102
                 cardMark[i] = trumpCardMark[(card[i] - 1) / 13];
                 cardNumber[i] = Math.Ceiling(card[i] % 13.1).ToString();
 
-                //cardVal[i] = (int)Math.Ceiling(card[i] % 13.1);
 
                 switch (cardNumber[i])
                 {
+                    case "1":
+                        cardNumber[i] = "A";
+                        break;
                     case "11":
                         cardNumber[i] = "J";
                         break;
@@ -220,24 +293,84 @@ namespace Work230102
             }
 
 
-            Console.WriteLine(" ----\t ----\t ----\t ----\t ----");
-            Console.WriteLine("|{0}{1} |\t|{2}{3} |\t|{4}{5} |\t|{6}{7} |\t|{8}{9} |",
-                cardMark[CardValue+0], cardNumber[CardValue + 0], cardMark[CardValue + 1], cardNumber[CardValue + 1], cardMark[CardValue + 2], cardNumber[CardValue + 2],
-                cardMark[CardValue + 3], cardNumber[CardValue + 3], cardMark[CardValue + 4], cardNumber[CardValue + 4]);
-            Console.WriteLine("|    |\t|    |\t|    |\t|    |\t|    |");
-            Console.WriteLine("| {0}{1}|\t| {2}{3}|\t| {4}{5}|\t| {6}{7}|\t| {8}{9}|",
-                cardNumber[CardValue + 0], cardMark[CardValue + 0], cardNumber[CardValue + 1], cardMark[CardValue + 1], cardNumber[CardValue + 2], cardMark[CardValue + 2],
-                cardNumber[CardValue + 3], cardMark[CardValue + 3], cardNumber[CardValue + 4], cardMark[CardValue + 4]);
-            Console.WriteLine(" ----\t ----\t ----\t ----\t ----");
+            
+            Console.Write("".PadLeft(1, ' '));
+            for (int i = 0; i < 5; i++)
+            {
+                Console.Write(" -----".PadRight(7, ' '));
+            }
+            Console.WriteLine();
 
+            Console.Write("".PadLeft(1, ' '));
+
+            for (int i = 0; i < 5; i++)
+            {
+                if (cardNumber[CardValue + i] == "10")
+                {
+                    Console.Write("|{0}{1} |".PadRight(5, ' '), cardMark[CardValue + i], cardNumber[CardValue + i]);
+
+                }
+                else
+                {
+                    Console.Write("|{0}{1}  |".PadRight(5, ' '), cardMark[CardValue + i], cardNumber[CardValue + i]);
+
+                }
+                
+            }
+            Console.WriteLine();
+
+            Console.Write("".PadLeft(1, ' '));
+
+            for (int i = 0; i < 5; i++)
+            {
+                Console.Write("|     |".PadRight(5, ' '));
+            }
+            Console.WriteLine();
+            Console.Write("".PadLeft(1, ' '));
+
+            for (int i = 0; i < 5; i++)
+            {
+                if (cardNumber[CardValue+ i] == "10")
+                {
+                    Console.Write("| {0}{1}|".PadRight(5, ' '), cardNumber[CardValue + i], cardMark[CardValue + i]);
+
+                }
+                else
+                {
+                    Console.Write("|  {0}{1}|".PadRight(5, ' '), cardNumber[CardValue + i], cardMark[CardValue + i]);
+
+                }
+
+            }
+            Console.WriteLine();
+            Console.Write("".PadLeft(1, ' '));
+
+            for (int i = 0; i < 5; i++)
+            {
+                Console.Write(" -----".PadRight(7, ' '));
+            }
+            Console.WriteLine();
+
+
+
+
+            Console.WriteLine();
+
+
+            Console.WriteLine("뽑은 카드는".PadLeft(19, ' '));
+            Console.Write("         ");
             for (int i = CardValue; i < CardValue + 5; i++)
             {
-                Console.WriteLine("뽑은 카드는 {0}{1} 입니다.", cardMark[i], cardNumber[i]);
-                Console.WriteLine();
+                Console.Write("{0}{1} ", cardMark[i], cardNumber[i]);
             }
-            
+            Console.WriteLine();
+
+            Console.WriteLine("입니다.".PadLeft(19, ' '));
+
+
 
         }// RollCard()
+
 
         //! 사용자의 변경된 카드를 보여주는 함수
         public void RollCardFivePlayer(int CardValue1, int CardValue2, int CardValue3,
@@ -259,6 +392,9 @@ namespace Work230102
 
                 switch (cardNumber[i])
                 {
+                    case "1":
+                        cardNumber[i] = "A";
+                        break;
                     case "11":
                         cardNumber[i] = "J";
                         break;
@@ -274,23 +410,81 @@ namespace Work230102
 
                 } // switch
             }
+            //====
 
+            Console.Write("".PadLeft(1, ' '));
+            for (int i = 0; i < 5; i++)
+            {
+                Console.Write(" -----".PadRight(7, ' '));
+            }
+            Console.WriteLine();
 
-            Console.WriteLine(" ----\t ----\t ----\t ----\t ----");
-            Console.WriteLine("|{0}{1} |\t|{2}{3} |\t|{4}{5} |\t|{6}{7} |\t|{8}{9} |",
-                cardMark[0], cardNumber[0], cardMark[1], cardNumber[1], cardMark[2], cardNumber[2],
-                cardMark[3], cardNumber[3], cardMark[4], cardNumber[4]);
-            Console.WriteLine("|    |\t|    |\t|    |\t|    |\t|    |");
-            Console.WriteLine("| {0}{1}|\t| {2}{3}|\t| {4}{5}|\t| {6}{7}|\t| {8}{9}|",
-                cardNumber[0], cardMark[0], cardNumber[1], cardMark[1], cardNumber[2], cardMark[2],
-                cardNumber[3], cardMark[3], cardNumber[4], cardMark[4]);
-            Console.WriteLine(" ----\t ----\t ----\t ----\t ----");
+            Console.Write("".PadLeft(1, ' '));
 
             for (int i = 0; i < 5; i++)
             {
-                Console.WriteLine("뽑은 카드는 {0}{1} 입니다.", cardMark[i], cardNumber[i]);
-                Console.WriteLine();
+                if (cardNumber[i] == "10")
+                {
+                    Console.Write("|{0}{1} |".PadRight(5, ' '), cardMark[i], cardNumber[i]);
+
+                }
+                else
+                {
+                    Console.Write("|{0}{1}  |".PadRight(5, ' '), cardMark[i], cardNumber[i]);
+
+                }
+
             }
+            Console.WriteLine();
+
+            Console.Write("".PadLeft(1, ' '));
+
+            for (int i = 0; i < 5; i++)
+            {
+                Console.Write("|     |".PadRight(5, ' '));
+            }
+            Console.WriteLine();
+            Console.Write("".PadLeft(1, ' '));
+
+            for (int i = 0; i < 5; i++)
+            {
+                if (cardNumber[i] == "10")
+                {
+                    Console.Write("| {0}{1}|".PadRight(5, ' '), cardNumber[i], cardMark[i]);
+
+                }
+                else
+                {
+                    Console.Write("|  {0}{1}|".PadRight(5, ' '), cardNumber[i], cardMark[i]);
+
+                }
+
+            }
+            Console.WriteLine();
+            Console.Write("".PadLeft(1, ' '));
+
+            for (int i = 0; i < 5; i++)
+            {
+                Console.Write(" -----".PadRight(7, ' '));
+            }
+            Console.WriteLine();
+
+            
+
+            Console.WriteLine();
+
+
+            Console.WriteLine("뽑은 카드는".PadLeft(19, ' '));
+            Console.Write("         ");
+            for (int i = 0; i < 5; i++)
+            {
+                Console.Write("{0}{1} ", cardMark[i], cardNumber[i]);
+            }
+            Console.WriteLine();
+
+            Console.WriteLine("입니다.".PadLeft(19, ' '));
+
+            
 
 
         }// RollCard()
@@ -349,7 +543,7 @@ namespace Work230102
             int playerMoney = 10000;
 
             bool isGameOver = false;
-            bool isCardChange = false;
+            
 
             while (isGameOver == false)
             {
@@ -376,6 +570,7 @@ namespace Work230102
                 Console.WriteLine("[컴퓨터의 턴]".PadLeft(20, ' '));
                 Console.WriteLine();
 
+
                 // 컴퓨터가 뽑는 카드 5개
                 trumpCard.SetupTrumpCards();
                 trumpCard.ShuffleCards();
@@ -392,11 +587,7 @@ namespace Work230102
 
                 Console.WriteLine("======================================");
 
-                //foreach(int i in ComputerCards)
-                //{
-                //    Console.WriteLine("{0} ", i);
-                //}
-
+                
 
                 Console.WriteLine("[플레이어의 턴]".PadLeft(20, ' '));
                 Console.WriteLine();
@@ -415,12 +606,14 @@ namespace Work230102
                 Console.WriteLine("======================================");
                 Console.WriteLine();
 
-                Console.WriteLine("현재 가지고 있는 포인트 : {0}", playerMoney);
+                Console.WriteLine("현재 가지고 있는 포인트 : {0}".PadLeft(22, ' '), playerMoney);
                 Console.WriteLine();
 
 
-                Console.WriteLine("배팅 하시겠습니까?".PadLeft(18, ' '));
-                Console.Write("(0과 숫자 의외 값을 입력시 패스) : ");
+                Console.WriteLine("배팅 하시겠습니까?".PadLeft(20, ' '));
+                Console.WriteLine();
+
+                Console.Write("(0 또는 문자를 입력시 패스) : ".PadLeft(23, ' '));
                 int.TryParse(Console.ReadLine(), out batting);
 
 
@@ -432,14 +625,22 @@ namespace Work230102
                     Console.WriteLine("[플레이어의 턴]".PadLeft(20, ' '));
 
                     Console.WriteLine();
-                    Console.WriteLine("배팅을 패스 하셨습니다.");
-                    Console.WriteLine("현재 가지고 있는 포인트는 {0} 입니다.", playerMoney);
+                    Console.WriteLine("[배팅을 패스 하셨습니다.]".PadLeft(21, ' '));
+                    Console.WriteLine();
+
+                    Console.WriteLine("현재 가지고 있는 포인트는\n".PadLeft(21, ' ') + "{0} 입니다.".PadLeft(18, ' '), playerMoney);
 
                     Console.WriteLine();
                 }
                 else
                 {
                     Console.Clear();
+                    Console.WriteLine("======================================");
+
+                    Console.WriteLine("======================================");
+                    Console.WriteLine("카드 뽑기 게임".PadLeft(20, ' '));
+                    Console.WriteLine("======================================");
+
 
                     Console.WriteLine("======================================");
                     Console.WriteLine("[컴퓨터의 턴]".PadLeft(20, ' '));
@@ -447,7 +648,8 @@ namespace Work230102
 
                     trumpCard.RollCardFive(checkloopCard1 - 10);
                     Console.WriteLine();
-                    Console.WriteLine("추가로 2장 더 뽑았습니다.");
+                    Console.WriteLine("추가로 뽑은 카드는".PadLeft(20, ' '));
+                    Console.WriteLine();
 
                     trumpCard.RollCardTwo(checkloopCard1);
 
@@ -460,6 +662,8 @@ namespace Work230102
 
 
                     int ChangeCardLoop = 0;
+
+                    bool isCardChange = false;
 
                     while (isCardChange == false)
                     {
@@ -479,18 +683,32 @@ namespace Work230102
                             break;
                         }
                         else { /* Do Nothing */ }
+                        Console.WriteLine("======================================");
+                        Console.WriteLine();
 
 
-                        Console.WriteLine("몇 번째 카드를 교체하시겠습니까? : ");
+                        Console.WriteLine("[몇 번째 카드를 교체하시겠습니까?]".PadLeft(22, ' '));
+                        Console.WriteLine();
+
+                        Console.Write("(0 또는 문자를 입력시 패스) : ".PadLeft(23, ' '));
+
                         int.TryParse(Console.ReadLine(), out ChangeCard);
+                        Console.WriteLine();
 
                         switch (ChangeCard)
                         {
                             case 0:
-                                Console.WriteLine("[System] 패스했습니다.");
+                                
+
+                                Console.WriteLine("======================================");
+
+                                Console.WriteLine();
+
+                                Console.WriteLine("[System] 패스했습니다.".PadLeft(23, ' '));
                                 isCardChange = true;
                                 break;
                             case 1:
+
                                 playerCards[ChangeCard - 1] = trumpCard.RollCard(checkloopCard1);
 
                                 checkloopCard1++;
@@ -517,30 +735,52 @@ namespace Work230102
                                 ChangeCardLoop++;
                                 break;
                             default:
-                                Console.WriteLine("[System] 이상한 입력입니다. 다시 입력하세요.");
-                                Console.ReadLine();
+                                Console.WriteLine("======================================");
+
+                                Console.WriteLine();
+                                Console.WriteLine("[System] 이상한 입력입니다.\n".PadLeft(25, ' ')+"다시 입력하세요.".PadLeft(19, ' '));
+
                                 break;
 
                         }
+
+
+                        if (isCardChange)
+                        {
+                            isCardChange = true;
+                            Console.ReadLine();
+                            break;
+                        }
+
                         Console.WriteLine();
                         Console.ReadLine();
 
                         Console.Clear();
+
+                        Console.WriteLine("======================================");
+
+                        Console.WriteLine("======================================");
+                        Console.WriteLine("카드 뽑기 게임".PadLeft(20, ' '));
+                        Console.WriteLine("======================================");
+
                         Console.WriteLine("======================================");
 
                         Console.WriteLine("[컴퓨터의 턴]".PadLeft(20, ' '));
                         Console.WriteLine();
 
                         trumpCard.RollCardFive(0);
+                        Console.WriteLine();
+
                         trumpCard.RollCardTwo(10);
 
                     }
 
+                    // 오름차순으로 정리
                     Array.Sort(ComputerCards);
                     Array.Sort(playerCards);
 
-                    int[] CheckComputer = new int[13];
-                    int[] CheckPlayer = new int[13];
+                    int[] CheckComputer = new int[14];
+                    int[] CheckPlayer = new int[14];
 
 
 
@@ -549,6 +789,8 @@ namespace Work230102
                         if ((int)Math.Ceiling(ComputerCards[i] % 13.1) == 1)
                         {
                             CheckComputer[0]++;
+                            CheckComputer[13]++;
+
                         }
                         else if ((int)Math.Ceiling(ComputerCards[i] % 13.1) == 2)
                         {
@@ -598,6 +840,7 @@ namespace Work230102
                         {
                             CheckComputer[12]++;
                         }
+                        else { /* Do Nothing */ }
 
                     }
 
@@ -606,6 +849,8 @@ namespace Work230102
                         if ((int)Math.Ceiling(playerCards[i] % 13.1) == 1)
                         {
                             CheckPlayer[0]++;
+                            CheckPlayer[13]++;
+
                         }
                         else if ((int)Math.Ceiling(playerCards[i] % 13.1) == 2)
                         {
@@ -655,6 +900,7 @@ namespace Work230102
                         {
                             CheckPlayer[12]++;
                         }
+                        else { /* Do Nothing */ }
 
                     }
 
@@ -667,14 +913,12 @@ namespace Work230102
                     int CheckCompTwoPeir = 0;
                     int straightCompCount = 0;
 
-
                     int PlayerFour = 0;
                     int PlayerThree = 0;
                     int PlayerOne = 0;
                     int PlayerTwo = 0;
                     int Playerstraight = 0;
                     int PlayerNotpeir = 0;
-
                     int CheckPlayTwoPeir = 0;
                     int straightplayCount = 0;
 
@@ -685,59 +929,171 @@ namespace Work230102
                     // 포카드, 트리플, 원페어, 투페어 등등 체크
                     for (int i = 0; i < CheckComputer.Length; i++)
                     {
-                        if (CheckComputer[i] == 4)
-                        {
-                            ComputerFour = i + 1;
 
+                        if (0 < CheckComputer[i])
+                        {
+                            ComputerNotpeir = i + 1;
                         }
-                        else if (CheckComputer[i] == 3)
-                        {
 
-                            ComputerThree = i + 1;
-                        }
-                        else if (CheckComputer[i] == 2)
+                        if (i == 0 || i == 13)
                         {
-                            ComputerOne = i + 1;
-                            CheckCompTwoPeir++;
-
-                            if (CheckCompTwoPeir == 2)
+                            if (i == 0)
                             {
-                                ComputerTwo = i + 1;
-                            }
 
+                            }
+                            else
+                            {
+                                ComputerNotpeir = 14;
+
+                                if (CheckComputer[13] == 4)
+                                {
+                                    ComputerFour = 14;
+
+                                }
+                                else if (CheckComputer[13] == 3)
+                                {
+
+                                    ComputerThree = 14;
+                                }
+                                else if (CheckComputer[13] == 2)
+                                {
+                                    ComputerOne = 14;
+
+                                    CheckCompTwoPeir++;
+
+
+                                    if (CheckCompTwoPeir == 2)
+                                    {
+                                        ComputerTwo = 14;
+
+                                        CheckCompTwoPeir--;
+                                    }
+
+                                }
+                                else
+                                {
+                                    
+                                }
+
+                            }
                         }
                         else
                         {
-                            ComputerNotpeir = i + 1;
+
+                            if (CheckComputer[i] == 4)
+                            {
+                                ComputerFour = i + 1;
+
+                            }
+                            else if (CheckComputer[i] == 3)
+                            {
+
+                                ComputerThree = i + 1;
+                            }
+                            else if (CheckComputer[i] == 2)
+                            {
+                                ComputerOne = i + 1;
+
+                                CheckCompTwoPeir++;
+
+                                if (CheckCompTwoPeir == 2)
+                                {
+                                    ComputerTwo = i + 1;
+
+                                    CheckCompTwoPeir--;
+                                }
+
+                            }
+                            else
+                            {
+                                
+                            }
                         }
                     }
 
 
                     for (int i = 0; i < CheckPlayer.Length; i++)
                     {
-                        if (CheckPlayer[i] == 4)
-                        {
-                            PlayerFour = i + 1;
-                        }
-                        else if (CheckPlayer[i] == 3)
-                        {
 
-                            PlayerThree = i + 1;
-                        }
-                        else if (CheckPlayer[i] == 2)
+                        if (0 < CheckPlayer[i])
                         {
-                            PlayerOne = i + 1;
-                            CheckPlayTwoPeir++;
+                            PlayerNotpeir = i + 1;
+                        }
 
-                            if (CheckPlayTwoPeir == 2)
+                        if (i == 0 || i == 13)
+                        {
+                            
+
+                            if (i == 0)
                             {
-                                PlayerTwo = i + 1;
+                                
                             }
+                            else
+                            {
+                                
 
+                                if (CheckPlayer[13] == 4)
+                                {
+                                    PlayerFour = 14;
+
+                                }
+                                else if (CheckPlayer[13] == 3)
+                                {
+
+                                    PlayerThree = 14;
+                                }
+                                else if (CheckPlayer[13] == 2)
+                                {
+                                    PlayerOne = 14;
+
+                                    CheckCompTwoPeir++;
+
+
+                                    if (CheckPlayTwoPeir == 2)
+                                    {
+                                        PlayerTwo = 14;
+
+                                        CheckPlayTwoPeir--;
+                                    }
+
+                                }
+                                else
+                                {
+
+                                }
+
+                            }
                         }
                         else
                         {
-                            PlayerNotpeir = i + 1;
+                            
+
+                            if (CheckPlayer[i] == 4)
+                            {
+                                PlayerFour = i + 1;
+                            }
+                            else if (CheckPlayer[i] == 3)
+                            {
+
+                                PlayerThree = i + 1;
+                            }
+                            else if (CheckPlayer[i] == 2)
+                            {
+                                PlayerOne = i + 1;
+
+                                CheckPlayTwoPeir++;
+
+                                if (CheckPlayTwoPeir == 2)
+                                {
+                                    PlayerTwo = i + 1;
+                                    CheckPlayTwoPeir--;
+                                }
+
+                            }
+                            else
+                            {
+
+                            }
                         }
                     }
 
@@ -749,20 +1105,25 @@ namespace Work230102
                         if (0 < ComputerCards[i] && ComputerCards[i] <= 13)
                         {
                             Computerflush[0]++;
+
+                            
                         }
                         else if (13 < ComputerCards[i] && ComputerCards[i] <= 26)
                         {
                             Computerflush[1]++;
+                            
 
                         }
                         else if (26 < ComputerCards[i] && ComputerCards[i] <= 39)
                         {
                             Computerflush[2]++;
+                            
 
                         }
                         else if (39 < ComputerCards[i] && ComputerCards[i] <= 52)
                         {
                             Computerflush[3]++;
+                            
 
                         }
 
@@ -773,6 +1134,8 @@ namespace Work230102
                         if (0 < playerCards[i] && playerCards[i] <= 13)
                         {
                             Playerflush[0]++;
+                            
+
                         }
                         else if (13 < playerCards[i] && playerCards[i] <= 26)
                         {
@@ -819,6 +1182,7 @@ namespace Work230102
                         {
                             straightplayCount = 0;
                         }
+                        
                         else
                         {
                             straightplayCount++;
@@ -833,25 +1197,28 @@ namespace Work230102
 
                     Console.WriteLine("======================================");
 
+                                        
+
                     // 승리 판단
                     if (0 < ComputerFour || 0 < PlayerFour)
                     {
-                        Console.WriteLine("포카드 결과");
+                        Console.WriteLine("[포카드 결과]".PadLeft(20, ' '));
+                        Console.WriteLine();
 
                         if (ComputerFour < PlayerFour)
                         {
-                            Console.WriteLine("플레이어 승리");
+                            Console.WriteLine("플레이어 승리".PadLeft(19, ' '));
                             WinCheck = true;
 
                         }
                         else if (PlayerFour < ComputerFour)
                         {
-                            Console.WriteLine("컴퓨터 승리");
+                            Console.WriteLine("컴퓨터 승리".PadLeft(19, ' '));
 
                         }
                         else
                         {
-                            Console.WriteLine("무승부");
+                            Console.WriteLine("무승부".PadLeft(18, ' '));
                         }
                     }
 
@@ -859,82 +1226,85 @@ namespace Work230102
                         Computerflush[3] == 5 || Playerflush[0] == 5 || Playerflush[1] == 5 ||
                         Playerflush[2] == 5 || Playerflush[3] == 5)
                     {
-                        Console.WriteLine("플러쉬 결과");
-                        if (Computerflush[3] == 1 || Playerflush[3] == 1)
+                        Console.WriteLine("[플러쉬 결과]".PadLeft(20, ' '));
+                        Console.WriteLine();
+
+
+                        if (Computerflush[3] == 5 || Playerflush[3] == 5)
                         {
 
                             if (Computerflush[3] < Playerflush[3])
                             {
-                                Console.WriteLine("플레이어 승리");
+                                Console.WriteLine("플레이어 승리".PadLeft(19, ' '));
                                 WinCheck = true;
 
                             }
                             else if (Playerflush[3] < Computerflush[3])
                             {
-                                Console.WriteLine("컴퓨터 승리");
+                                Console.WriteLine("컴퓨터 승리".PadLeft(19, ' '));
 
                             }
                             else
                             {
-                                Console.WriteLine("무승부");
+                                Console.WriteLine("무승부".PadLeft(18, ' '));
 
                             }
                         }
-                        else if (Computerflush[2] == 1 || Playerflush[2] == 1)
+                        else if (Computerflush[2] == 5 || Playerflush[2] == 5)
                         {
                             if (Computerflush[2] < Playerflush[2])
                             {
-                                Console.WriteLine("플레이어 승리");
+                                Console.WriteLine("플레이어 승리".PadLeft(19, ' '));
                                 WinCheck = true;
 
                             }
                             else if (Playerflush[2] < Computerflush[2])
                             {
-                                Console.WriteLine("컴퓨터 승리");
+                                Console.WriteLine("컴퓨터 승리".PadLeft(19, ' '));
 
                             }
                             else
                             {
-                                Console.WriteLine("무승부");
+                                Console.WriteLine("무승부".PadLeft(18, ' '));
 
                             }
                         }
-                        else if (Computerflush[1] == 1 || Playerflush[1] == 1)
+                        else if (Computerflush[1] == 5 || Playerflush[1] == 5)
                         {
                             if (Computerflush[1] < Playerflush[1])
                             {
-                                Console.WriteLine("플레이어 승리");
+                                Console.WriteLine("플레이어 승리".PadLeft(19, ' '));
                                 WinCheck = true;
 
                             }
                             else if (Playerflush[1] < Computerflush[1])
                             {
-                                Console.WriteLine("컴퓨터 승리");
+                                Console.WriteLine("컴퓨터 승리".PadLeft(19, ' '));
 
                             }
                             else
                             {
-                                Console.WriteLine("무승부");
+                                Console.WriteLine("무승부".PadLeft(18, ' '));
 
                             }
                         }
-                        else if (Computerflush[0] == 1 || Playerflush[0] == 1)
+                        else if (Computerflush[0] == 5 || Playerflush[0] == 5)
                         {
                             if (Computerflush[0] < Playerflush[0])
                             {
-                                Console.WriteLine("플레이어 승리");
+                                Console.WriteLine("플레이어 승리".PadLeft(19, ' '));
                                 WinCheck = true;
 
                             }
                             else if (Playerflush[0] < Computerflush[0])
                             {
-                                Console.WriteLine("컴퓨터 승리");
+                                Console.WriteLine("컴퓨터 승리".PadLeft(19, ' '));
 
 
                             }
                             else
                             {
-                                Console.WriteLine("무승부");
+                                Console.WriteLine("무승부".PadLeft(18, ' '));
 
                             }
                         }
@@ -945,114 +1315,127 @@ namespace Work230102
 
                     else if (0 < Computerstraight || 0 < Playerstraight)
                     {
-                        Console.WriteLine("스트레이트 결과");
+                        Console.WriteLine("[스트레이트 결과]".PadLeft(20, ' '));
+                        Console.WriteLine();
+
 
                         if (Computerstraight < Playerstraight)
                         {
-                            Console.WriteLine("플레이어 승리");
+                            Console.WriteLine("플레이어 승리".PadLeft(19, ' '));
                             WinCheck = true;
 
                         }
                         else if (Playerstraight < Computerstraight)
                         {
-                            Console.WriteLine("컴퓨터 승리");
+                            Console.WriteLine("컴퓨터 승리".PadLeft(19, ' '));
 
                         }
                         else
                         {
-                            Console.WriteLine("무승부");
+                            Console.WriteLine("무승부".PadLeft(18, ' '));
 
                         }
                     }
 
                     else if (0 < ComputerThree || 0 < PlayerThree)
                     {
-                        Console.WriteLine("트리플 결과");
+                        Console.WriteLine("[트리플 결과]".PadLeft(20, ' '));
+                        Console.WriteLine();
+
 
                         if (ComputerThree < PlayerThree)
                         {
-                            Console.WriteLine("플레이어 승리");
+                            Console.WriteLine("플레이어 승리".PadLeft(19, ' '));
                             WinCheck = true;
 
                         }
                         else if (PlayerThree < ComputerThree)
                         {
-                            Console.WriteLine("컴퓨터 승리");
+                            Console.WriteLine("컴퓨터 승리".PadLeft(19, ' '));
 
                         }
                         else
                         {
-                            Console.WriteLine("무승부");
+                            Console.WriteLine("무승부".PadLeft(18, ' '));
 
                         }
                     }
 
                     else if (0 < ComputerTwo || 0 < PlayerTwo)
                     {
-                        Console.WriteLine("투페어 결과");
+                        Console.WriteLine("[투페어 결과]".PadLeft(20, ' '));
+                        Console.WriteLine();
+
 
                         if (ComputerTwo < PlayerTwo)
                         {
-                            Console.WriteLine("플레이어 승리");
+                            Console.WriteLine("플레이어 승리".PadLeft(19, ' '));
                             WinCheck = true;
 
                         }
                         else if (PlayerTwo < ComputerTwo)
                         {
-                            Console.WriteLine("컴퓨터 승리");
+                            Console.WriteLine("컴퓨터 승리".PadLeft(19, ' '));
 
                         }
                         else
                         {
-                            Console.WriteLine("무승부");
+                            Console.WriteLine("무승부".PadLeft(18, ' '));
 
                         }
                     }
 
                     else if (0 < ComputerOne || 0 < PlayerOne)
                     {
-                        Console.WriteLine("원 페어 결과");
+                        Console.WriteLine("[원페어 결과]".PadLeft(20, ' '));
+                        Console.WriteLine();
+
 
                         if (ComputerOne < PlayerOne)
                         {
-                            Console.WriteLine("플레이어 승리");
+                            Console.WriteLine("플레이어 승리".PadLeft(19, ' '));
                             WinCheck = true;
 
                         }
                         else if (PlayerOne < ComputerOne)
                         {
-                            Console.WriteLine("컴퓨터 승리");
+                            Console.WriteLine("컴퓨터 승리".PadLeft(19, ' '));
 
                         }
                         else
                         {
-                            Console.WriteLine("무승부");
+                            Console.WriteLine("무승부".PadLeft(18, ' '));
 
                         }
                     }
 
                     else if (0 < ComputerNotpeir || 0 < PlayerNotpeir)
                     {
-                        Console.WriteLine("노페어 결과");
+                        Console.WriteLine("[노페어 결과]".PadLeft(20, ' '));
+                        Console.WriteLine();
+
 
                         if (ComputerNotpeir < PlayerNotpeir)
                         {
-                            Console.WriteLine("플레이어 승리");
+                            Console.WriteLine("플레이어 승리".PadLeft(19, ' '));
                             WinCheck = true;
 
                         }
                         else if (PlayerNotpeir < ComputerNotpeir)
                         {
-                            Console.WriteLine("컴퓨터 승리");
+                            Console.WriteLine("컴퓨터 승리".PadLeft(19, ' '));
 
                         }
                         else
                         {
-                            Console.WriteLine("무승부");
+                            Console.WriteLine("무승부".PadLeft(18, ' '));
 
                         }
                     }
                     else { /*Do Nothing */}
+
+
+
 
 
                     if (WinCheck == true)
@@ -1063,9 +1446,11 @@ namespace Work230102
                         Console.WriteLine("======================================");
 
                         Console.WriteLine();
-                        Console.WriteLine("배팅이 성공했습니다.");
+                        Console.WriteLine("[배팅에 성공했습니다.]".PadLeft(21, ' '));
+                        Console.WriteLine();
 
-                        Console.WriteLine("현재 가지고 있는 포인트는 {0} 입니다.", playerMoney);
+                        Console.WriteLine("현재 가지고 있는 포인트는\n".PadLeft(21, ' ') + "{0} 입니다.".PadLeft(18, ' '), playerMoney);
+
                         Console.WriteLine();
 
                     }
@@ -1075,8 +1460,11 @@ namespace Work230102
                         Console.WriteLine();
                         Console.WriteLine("======================================");
                         Console.WriteLine();
-                        Console.WriteLine("배팅에 패배했습니다.");
-                        Console.WriteLine("현재 가지고 있는 포인트는 {0} 입니다.", playerMoney);
+                        Console.WriteLine("[배팅에 패배했습니다.]".PadLeft(21, ' '));
+                        Console.WriteLine();
+
+                        Console.WriteLine("현재 가지고 있는 포인트는\n".PadLeft(21, ' ') + "{0} 입니다.".PadLeft(18, ' '), playerMoney);
+
                         Console.WriteLine();
                     }
                 }
@@ -1090,8 +1478,8 @@ namespace Work230102
 
                     Console.WriteLine("======================================");
                     Console.WriteLine();
-                    Console.WriteLine("{0} 포인트를 모으셨습니다!", playerMoney);
-                    Console.WriteLine("게임에서 승리하셨습니다.");
+                    Console.WriteLine("{0} 포인트를 모으셨습니다!".PadLeft(20, ' '), playerMoney);
+                    Console.WriteLine("[게임에서 승리하셨습니다.]".PadLeft(21, ' '));
                     Console.WriteLine();
 
                     Console.WriteLine("======================================");
@@ -1105,8 +1493,8 @@ namespace Work230102
 
                     Console.WriteLine("======================================");
                     Console.WriteLine();
-                    Console.WriteLine("더 이상 포인트가 없습니다!");
-                    Console.WriteLine("게임에서 패배하셨습니다.");
+                    Console.WriteLine("[더 이상 포인트가 없습니다!]".PadLeft(22, ' '));
+                    Console.WriteLine("[게임에서 패배하셨습니다.]".PadLeft(21, ' '));
                     Console.WriteLine();
 
                     Console.WriteLine("======================================");
@@ -1114,7 +1502,8 @@ namespace Work230102
                 }
                 else
                 {
-                    Console.WriteLine("[아무 키나 입력하면 다음으로 넘어갑니다.]");
+                    Console.WriteLine("[System] 아무 키나 입력하면\n".PadLeft(25, ' ')
+                        + "다음으로 넘어갑니다.".PadLeft(20, ' '));
                     int.TryParse(Console.ReadLine(), out CheckPass);
                     Console.Clear();
                 }
