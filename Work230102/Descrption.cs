@@ -1111,6 +1111,8 @@ namespace Work230102
                             
 
                         }
+                        else
+                        { /* Do Nothing */ }
 
                     }
 
@@ -1459,6 +1461,7 @@ namespace Work230102
                 if (100000 <= playerMoney)
                 {
                     isGameOver = true;
+
                     Console.WriteLine("======================================");
 
                     Console.WriteLine("======================================");
@@ -1474,6 +1477,7 @@ namespace Work230102
                 else if (playerMoney <= 0)
                 {
                     isGameOver = true;
+
                     Console.WriteLine("======================================");
 
                     Console.WriteLine("======================================");
@@ -1495,8 +1499,8 @@ namespace Work230102
 
 
 
-            }
-        }
-    }
+            } // loop : 게임이 끝날 때까지
+        } // GameStart()
+    } // class TrumpGame
 
 }
